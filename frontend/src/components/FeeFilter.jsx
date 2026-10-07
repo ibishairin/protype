@@ -15,7 +15,7 @@ const FeeFilter = ({ selectedFee, onFeeChange }) => {
       <div className="filter-container">
         <h2>Schools By Fees</h2>
         <p>Explore schools that match your family's budget.</p>
-        
+
         <div className="fee-grid">
           {feeRanges.map((fee) => (
             <button

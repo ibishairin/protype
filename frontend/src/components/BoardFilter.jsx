@@ -14,8 +14,11 @@ const BoardFilter = ({ selectedBoard, onBoardChange }) => {
     <section className="filter-section">
       <div className="filter-container">
         <h2>Explore Schools By Boards</h2>
-        <p>Instantly filter and view top-rated schools based on the curriculum that best suits your child's future.</p>
-        
+        <p>
+          Instantly filter and view top-rated schools based on the curriculum
+          that best suits your child's future.
+        </p>
+
         <div className="board-grid">
           {boards.map((board) => (
             <button

@@ -18,7 +18,7 @@ const AreaFilter = ({ selectedArea, onAreaChange }) => {
       <div className="filter-container">
         <h2>Schools by Popular Areas</h2>
         <p>Parents are mostly applying for schools in these areas.</p>
-        
+
         <div className="area-grid">
           {areas.map((area) => (
             <button

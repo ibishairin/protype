@@ -13,7 +13,9 @@ const Header = () => {
           <a href="/explore">Explore Schools</a>
           <a href="/compare">Compare Schools</a>
           <a href="/smart-search">Smart Search</a>
-          <a href="/counselling" className="counselling-btn">Get Free Counselling</a>
+          <a href="/counselling" className="counselling-btn">
+            Get Free Counselling
+          </a>
         </nav>
         <div className="auth-buttons">
           <button className="login-btn">Log in</button>

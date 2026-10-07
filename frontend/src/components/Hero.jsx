@@ -20,7 +20,10 @@ const Hero = () => {
         </div>
         <div className="counselling-cta">
           <h3>Need help choosing the right school?</h3>
-          <p>Talk to our admission experts & get a personalised shortlist for your child.</p>
+          <p>
+            Talk to our admission experts & get a personalised shortlist for
+            your child.
+          </p>
           <button className="book-counselling">Book Expert Counselling</button>
           <p className="counselled-count">7 Lakh+ parents counselled</p>
         </div>

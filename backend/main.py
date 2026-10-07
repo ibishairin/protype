@@ -1,11 +1,12 @@
+from typing import Optional
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
+
 
 app = FastAPI(title="Ezyschooling API")
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -14,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Data Models
+
 class School(BaseModel):
     id: int
     name: str
@@ -25,17 +26,19 @@ class School(BaseModel):
     rating: float
     image: str
 
+
 class City(BaseModel):
     id: int
     name: str
     state: str
+
 
 class Area(BaseModel):
     id: int
     name: str
     school_count: int
 
-# Sample Data
+
 cities = [
     {"id": 1, "name": "Noida", "state": "Uttar Pradesh"},
     {"id": 2, "name": "Delhi", "state": "Delhi"},
@@ -53,7 +56,7 @@ schools = [
         "board": "CBSE",
         "fees": "₹15,000/month",
         "rating": 4.5,
-        "image": "/images/dps.jpg"
+        "image": "/images/dps.jpg",
     },
     {
         "id": 2,
@@ -63,7 +66,7 @@ schools = [
         "board": "CBSE",
         "fees": "₹12,000/month",
         "rating": 4.3,
-        "image": "/images/mris.jpg"
+        "image": "/images/mris.jpg",
     },
     {
         "id": 3,
@@ -73,7 +76,7 @@ schools = [
         "board": "CBSE",
         "fees": "₹10,000/month",
         "rating": 4.2,
-        "image": "/images/aspam.jpg"
+        "image": "/images/aspam.jpg",
     },
     {
         "id": 4,
@@ -83,7 +86,7 @@ schools = [
         "board": "CBSE",
         "fees": "₹11,000/month",
         "rating": 4.4,
-        "image": "/images/mayoor.jpg"
+        "image": "/images/mayoor.jpg",
     },
     {
         "id": 5,
@@ -93,7 +96,7 @@ schools = [
         "board": "CBSE",
         "fees": "₹13,000/month",
         "rating": 4.1,
-        "image": "/images/ramagya.jpg"
+        "image": "/images/ramagya.jpg",
     },
 ]
 
@@ -113,39 +116,58 @@ boards = [
     {"id": 5, "name": "ICSE/CISCE", "school_count": 6},
 ]
 
-# API Endpoints
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Ezyschooling API"}
+
 
 @app.get("/api/cities")
 def get_cities():
     return cities
 
+
 @app.get("/api/schools")
 def get_schools(city: Optional[str] = None, board: Optional[str] = None):
     filtered_schools = schools
+
     if city:
-        filtered_schools = [s for s in filtered_schools if s["location"].lower() == city.lower()]
+        filtered_schools = [
+            school
+            for school in filtered_schools
+            if school["location"].lower() == city.lower()
+        ]
+
     if board:
-        filtered_schools = [s for s in filtered_schools if s["board"].lower() == board.lower()]
+        filtered_schools = [
+            school
+            for school in filtered_schools
+            if school["board"].lower() == board.lower()
+        ]
+
     return filtered_schools
+
 
 @app.get("/api/schools/{school_id}")
 def get_school(school_id: int):
-    school = next((s for s in schools if s["id"] == school_id), None)
+    school = next((item for item in schools if item["id"] == school_id), None)
     if school:
         return school
+
     return {"error": "School not found"}
+
 
 @app.get("/api/areas")
 def get_areas():
     return areas
 
+
 @app.get("/api/boards")
 def get_boards():
     return boards
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
